@@ -1,6 +1,6 @@
 <script setup>
 const title = 'Booking app';
-const subtitle = 'Первый Vue-компонент внутри Laravel';
+const subtitle = 'Первый Vue-компонент внутри';
 </script>
 
 <template>
