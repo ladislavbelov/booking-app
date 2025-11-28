@@ -8,11 +8,24 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/js/app.js',
+                'resources/js/app.ts', // измените .js на .ts
             ],
             refresh: true,
         }),
-        vue(),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
+        }),
         tailwindcss(),
     ],
+    publicDir: 'public',
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+        },
+    },
 });
