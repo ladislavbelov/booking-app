@@ -4,11 +4,13 @@
 	import { useForm } from 'vee-validate';
 	import * as yup from 'yup';
 	import { toTypedSchema } from '@vee-validate/yup';
+	import CustomCheckbox from '@/components/forms/CustomCheckbox.vue';
 
 	interface RegisterFormData {
 		email: string;
 		password: string;
 		password_confirmation: string;
+		role: string;
 	}
 	// Схема валидации
 	const validationSchema = yup.object({
@@ -35,6 +37,7 @@
 		initialValues: {
 			email: '',
 			password: '',
+			role: 'get',
 		},
 	});
 
@@ -42,6 +45,7 @@
 		const resultData = {
 			email: values.email.trim(),
 			password: values.password.trim(),
+			role: values.role,
 		};
 		console.log('Данные формы:', resultData);
 
@@ -80,7 +84,14 @@
 				input-type="password"
 				autocomplete="current-password"
 			/>
-
+			<div class="flex flex-col gap-4 w-full justify-center items-center">
+				<span>Я буду</span>
+				<CustomCheckbox
+					id="role"
+					name="role"
+					value="get"
+				/>
+			</div>
 			<Button
 				type="submit"
 				:disabled="isSubmitting"
