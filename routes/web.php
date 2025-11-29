@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+// дубина стоиросовая
 Route::get('/', function () {
     return view('welcome');
 });
