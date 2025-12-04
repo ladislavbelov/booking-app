@@ -1,0 +1,71 @@
+{
+  "_vee-validate-yup-BZ6BKC9l.css": {
+    "file": "assets/vee-validate-yup-BZ6BKC9l.css",
+    "src": "_vee-validate-yup-BZ6BKC9l.css"
+  },
+  "_vee-validate-yup-D86eLwJW.js": {
+    "file": "assets/vee-validate-yup-D86eLwJW.js",
+    "name": "vee-validate-yup",
+    "imports": [
+      "resources/js/app.ts"
+    ],
+    "css": [
+      "assets/vee-validate-yup-BZ6BKC9l.css"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-v84jBQpe.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/app.ts": {
+    "file": "assets/app-Dzu6kLi7.js",
+    "name": "app",
+    "src": "resources/js/app.ts",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/views/Home.vue",
+      "resources/js/views/Login.vue",
+      "resources/js/views/Registration.vue"
+    ],
+    "css": [
+      "assets/app-CVwJAdBO.css"
+    ]
+  },
+  "resources/js/views/Home.vue": {
+    "file": "assets/Home-BzTRfT9K.js",
+    "name": "Home",
+    "src": "resources/js/views/Home.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts"
+    ]
+  },
+  "resources/js/views/Login.vue": {
+    "file": "assets/Login-Da0pguEK.js",
+    "name": "Login",
+    "src": "resources/js/views/Login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vee-validate-yup-D86eLwJW.js",
+      "resources/js/app.ts"
+    ]
+  },
+  "resources/js/views/Registration.vue": {
+    "file": "assets/Registration-B4Lvh7iA.js",
+    "name": "Registration",
+    "src": "resources/js/views/Registration.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vee-validate-yup-D86eLwJW.js",
+      "resources/js/app.ts"
+    ],
+    "css": [
+      "assets/Registration-3mpuoFMk.css"
+    ]
+  }
+}
