@@ -4,11 +4,15 @@
 	import { useForm } from 'vee-validate';
 	import * as yup from 'yup';
 	import { toTypedSchema } from '@vee-validate/yup';
+	import { useAuthStore } from '@/stores/AuthStore.ts';
+	import router from '@/router';
 
 	interface LoginFormData {
 		email: string;
 		password: string;
 	}
+	const authStore = useAuthStore();
+
 	// Схема валидации
 	const validationSchema = yup.object({
 		email: yup
@@ -33,13 +37,19 @@
 		},
 	});
 
-	const onSubmit = handleSubmit((values) => {
+	const onSubmit = handleSubmit(async (values) => {
 		const resultData = {
 			email: values.email.trim(),
 			password: values.password.trim(),
 		};
-		console.log('Данные формы:', resultData);
-		// Отправка на сервер
+
+		await authStore.login(resultData);
+		// Если авторизация успешна, перенаправляем на главную
+		if (authStore.isAuthenticated && !authStore.isLoading) {
+			router.push({
+				path: '/',
+			});
+		}
 	});
 </script>
 

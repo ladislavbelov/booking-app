@@ -1,6 +1,23 @@
+<script setup lang="ts">
+	import Logo from '@/components/ui/Logo.vue';
+	import { MoveLeft } from 'lucide-vue-next';
+	import { useAuthStore } from '@/stores/AuthStore.ts';
+	import { ref, watch } from 'vue';
+	import AuthError from '@/components/allerts/AuthError.vue';
+	const authStore = useAuthStore();
+	const serverError = ref<string | null>(null);
+	watch(
+		() => authStore.error,
+		(newError) => {
+			if (newError) {
+				serverError.value = newError;
+			}
+		}
+	);
+</script>
 <template>
-	<div class="login-layout">
-		<main class="flex">
+	<div class="layout">
+		<main class="flex overflow-hidden">
 			<div class="hidden md:max-w-[45%] md:w-full md:block">
 				<img
 					src="/images/bg_01.jpg"
@@ -10,7 +27,8 @@
 					decoding="sync"
 				/>
 			</div>
-			<div class="flex flex-col grow p-[20px] colored">
+			<div class="flex flex-col grow p-[20px] colored relative">
+				<AuthError />
 				<div class="flex justify-between items-center">
 					<!--					Тут проверка истории нужна и условный рендер-->
 					<button
@@ -40,13 +58,8 @@
 	</div>
 </template>
 
-<script setup lang="ts">
-	import Logo from '@/components/ui/Logo.vue';
-	import { MoveLeft } from 'lucide-vue-next';
-</script>
-
 <style scoped>
-	.login-layout {
+	.layout {
 		min-height: 100vh;
 		max-height: 100vh;
 		display: flex;

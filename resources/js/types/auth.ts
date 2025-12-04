@@ -1,28 +1,36 @@
 export type UserRole = 'get' | 'post' | 'superadmin';
 
-export interface AuthUser {
-  id: number;
-  email: string;
-  role: UserRole;
+export interface User {
+	id: number;
+	name: string;
+	email: string;
+	role: UserRole;
+	emailVerifiedAt: string | null;
+	createdAt: Date;
+	updatedAt: Date;
+}
+export interface AuthUser extends User {
+	password: string;
+}
+//============LOGIN============
+export type LoginRequest = Pick<AuthUser, 'email' | 'password'>;
+
+export interface LoginResponse {
+	token: string;
+	user: User;
 }
 
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
-
+//============REGISTRATION============
 export interface RegisterRequest {
-  email: string;
-  password: string;
-  password_confirmation: string;
-  role: UserRole;
+	name: string;
+	email: string;
+	password: string;
+	password_confirmation: string;
+	role: 'get' | 'post';
 }
+//============ERRORS============
 
-export interface AuthResponse {
-  token: string;
-  user: AuthUser;
-}
-
-export interface ValidationErrors {
-  [field: string]: string[];
+export interface ApiError {
+	message: string;
+	errors?: Record<string, string[]>;
 }

@@ -2,6 +2,7 @@
 	import Logo from '@/components/ui/Logo.vue';
 	import Container from '@/components/layout/Container.vue';
 	import HeaderNavigation from '@/components/navigation/HeaderNavigation.vue';
+	import UserControls from '@/components/controls/UserControls.vue';
 </script>
 
 <template>
@@ -14,7 +15,10 @@
 				>
 					<Logo />
 				</router-link>
-				<HeaderNavigation />
+				<div class="flex gap-9 items-center">
+					<HeaderNavigation />
+					<UserControls />
+				</div>
 			</div>
 		</Container>
 	</header>

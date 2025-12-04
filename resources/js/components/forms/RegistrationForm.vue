@@ -4,16 +4,31 @@
 	import { useForm } from 'vee-validate';
 	import * as yup from 'yup';
 	import { toTypedSchema } from '@vee-validate/yup';
+	import Modal from '@/components/ui/Modal.vue';
 	import CustomCheckbox from '@/components/forms/CustomCheckbox.vue';
+	import { useAuthStore } from '@/stores/AuthStore.ts';
+
+	import { useModal } from '@/utils/useModal.ts';
 
 	interface RegisterFormData {
+		name: string;
 		email: string;
 		password: string;
 		password_confirmation: string;
 		role: string;
 	}
-	// Схема валидации
+
+	const authStore = useAuthStore();
+
+	// Схема валидации надо выносить
 	const validationSchema = yup.object({
+		name: yup
+			.string()
+			.required('Имя обязательно')
+			.transform((value) => value?.trim())
+			.matches(/^\S*$/, 'Имя не должено содержать пробелы')
+			.min(4, 'Имя должно быть не мее 4 символов'),
+
 		email: yup
 			.string()
 			.required('Email обязателен')
@@ -31,25 +46,29 @@
 			.required('Подтверждение пароля обязательно')
 			.oneOf([yup.ref('password')], 'Пароли не совпадают'),
 	});
+	const modal = useModal();
 
 	const { handleSubmit, isSubmitting } = useForm<RegisterFormData>({
 		validationSchema: toTypedSchema(validationSchema),
 		initialValues: {
+			name: '',
 			email: '',
 			password: '',
 			role: 'get',
 		},
 	});
 
-	const onSubmit = handleSubmit((values) => {
+	const onSubmit = handleSubmit(async (values) => {
 		const resultData = {
+			name: values.name,
 			email: values.email.trim(),
 			password: values.password.trim(),
-			role: values.role,
+			password_confirmation: values.password_confirmation.trim(),
+			role: values.role as 'get' | 'post',
 		};
 		console.log('Данные формы:', resultData);
-
-		// Отправка на сервер
+		await authStore.registration(resultData);
+		modal.open();
 	});
 </script>
 
@@ -62,6 +81,13 @@
 			<!--			В регистрации при вводе email можно отправлять запрос с дебаунс еще до нажатия-->
 			<!--			кнопки отправить и проверять есть ли такое мыло в бд, если есть то-->
 			<!--			ошибка через setError-->
+			<Input
+				name="name"
+				placeholder="Введите ваше имя"
+				label="Ваше имя"
+				input-type="text"
+				autocomplete="name"
+			/>
 			<Input
 				name="email"
 				placeholder="Введите ваш email"
@@ -109,4 +135,13 @@
 			>
 		</p>
 	</div>
+	<Modal
+		v-model="modal.isOpen.value"
+		title="Успешно"
+		@close="modal.close"
+	>
+		<p class="text-[16px] text-[#7c7c7c] text-center">
+			Вы успешно зарегистрировались!
+		</p>
+	</Modal>
 </template>
