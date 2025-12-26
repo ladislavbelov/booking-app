@@ -4,7 +4,7 @@
 	import { computed } from 'vue';
 
 	interface InputProps {
-		inputType: 'email' | 'password' | 'text';
+		inputType: 'email' | 'password' | 'text' | 'number';
 		id?: string;
 		label?: string;
 		placeholder?: string;
@@ -28,6 +28,10 @@
 </script>
 
 <template>
+	<!--Универсальный компонент инпута, при использовании ОБЯЗАТЕЛЬНО указывать тип-->
+	<!--нужного инпута 'email' | 'password' | 'text' | 'number', передавать обязателен-->
+	<!--ли он, в виде :required="true / false", указать поле для отправки name='нужное-->
+	<!--имя из типа'-->
 	<div class="flex flex-col gap-1.5">
 		<label
 			v-if="label"

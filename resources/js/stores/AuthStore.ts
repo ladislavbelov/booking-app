@@ -22,6 +22,7 @@ export const useAuthStore = defineStore('auth', () => {
 	const userRole = computed(() => user.value?.role);
 	const userId = computed(() => user.value?.id);
 	const currentToken = computed(() => token.value);
+	const userName = computed(() => user.value?.name);
 
 	// Actions
 	//==============LOGIN===============
@@ -145,7 +146,9 @@ export const useAuthStore = defineStore('auth', () => {
 		greeting,
 		userRole,
 		userId,
+		userName,
 		currentToken,
+		isInitialized,
 
 		// Actions
 		login,

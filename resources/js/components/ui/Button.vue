@@ -5,6 +5,7 @@
 		type?: 'reset' | 'submit' | 'button';
 		disabled?: boolean;
 		loading?: boolean;
+		title?: string;
 	}
 
 	const props = withDefaults(defineProps<ButtonProps>(), {
@@ -42,6 +43,7 @@
 		:class="buttonClasses"
 		v-bind="attrs"
 		@click="handleClick"
+		:title="title"
 	>
 		<span
 			v-if="loading"
