@@ -1,9 +1,11 @@
 <script setup lang="ts">
-	import { useAuthStore } from '@/stores/AuthStore.ts';
-
-	const user = useAuthStore();
+	import Container from '@/components/layout/Container.vue';
 </script>
 
-<template>Home {{ user.greeting }}</template>
+<template>
+	<section class="">
+		<Container>home </Container>
+	</section>
+</template>
 
 <style scoped></style>

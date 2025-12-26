@@ -1,18 +1,31 @@
 <!--Есть размеры по дефолты, свои размеры передаем пропсами-->
 <script setup lang="ts">
+	import { computed } from 'vue';
+
 	interface LogoProps {
-		width?: number;
-		height?: number;
+		width?: string;
+		height?: string;
+		logoType?: 'light' | 'dark';
 	}
-	withDefaults(defineProps<LogoProps>(), {
-		width: 200,
-		height: 48,
+	const props = withDefaults(defineProps<LogoProps>(), {
+		width: '200',
+		height: '48',
+		logoType: 'light',
+	});
+	const logoPath = computed(() => {
+		switch (props.logoType) {
+			case 'dark':
+				return '/images/logo-dark.svg';
+			case 'light':
+			default:
+				return '/images/logo.svg';
+		}
 	});
 </script>
 
 <template>
 	<img
-		src="/images/logo.svg"
+		:src="logoPath"
 		alt="Логотип"
 		:width="width"
 		:height="height"

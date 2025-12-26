@@ -15,6 +15,7 @@ export default defineConfig({
 				'resources/js/**/*.vue',
 				'resources/js/**/*.js',
 				'resources/css/**/*.css',
+				'resources/fonts/**/*.woff2',
 			],
 		}),
 		vue({
@@ -27,6 +28,9 @@ export default defineConfig({
 		}),
 		tailwindcss(),
 	],
+	css: {
+		postcss: './postcss.config.js',
+	},
 	publicDir: 'public',
 
 	resolve: {
